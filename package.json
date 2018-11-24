@@ -1,8 +1,9 @@
 {
   "name": "koa-yup-validator",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
+  "repository": "https://github.com/Turee/koa-yup-validator.git",
   "devDependencies": {
     "@types/jest": "^23.3.9",
     "@types/koa": "^2.0.47",
@@ -23,7 +24,9 @@
     "test": "jest --coverage --verbose",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "test:ci": "JEST_JUNIT_OUTPUT='reports/junit/js-test-results.xml' jest --ci --coverage --verbose --reporters=default --reporters=jest-junit",
-    "watch": "jest -w"
+    "watch": "jest -w",
+    "build": "tsc",
+    "prepublish": "yarn run build"
   },
   "dependencies": {
     "lodash.get": "^4.4.2",
