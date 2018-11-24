@@ -1,4 +1,4 @@
-# koa-yup-validator
+# koa-yup-validator [![CircleCI](https://circleci.com/gh/Turee/koa-yup-validator.svg?style=svg)](https://circleci.com/gh/Turee/koa-yup-validator)
 
 Koa middleware for validating and coercing request data.
 
