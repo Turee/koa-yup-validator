@@ -1,5 +1,5 @@
 const yup = require("yup");
-import mkValidator from "../src";
+const mkValidator = require("../src");
 const _ = require("lodash");
 
 describe("Smoke tests", async () => {

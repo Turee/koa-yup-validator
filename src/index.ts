@@ -80,7 +80,7 @@ const validateConfig = ({ path }: ValidationConfig) => {
   }
 };
 
-export default <T>(
+module.exports = <T>(
   schema: Schema<T>,
   config: ValidationConfig = defaultConfig
 ) => {
