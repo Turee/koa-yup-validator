@@ -1999,10 +1999,10 @@ jest-jasmine2@^24.1.0:
     pretty-format "^24.0.0"
     throat "^4.0.0"
 
-jest-junit@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.arcules.ninja/jest-junit/-/jest-junit-6.3.0.tgz#99e64ebc54eddcb21238f0cc49f5820c89a8c785"
-  integrity sha512-3PH9UkpaomX6CUzqjlnk0m4yBCW/eroxV6v61OM6LkCQFO848P3YUhfIzu8ypZSBKB3vvCbB4WaLTKT0BrIf8A==
+jest-junit@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/jest-junit/-/jest-junit-7.0.0.tgz#e2ab2dc3f4eb2768f3e4c43e4e4cd841133a8c0e"
+  integrity sha512-ljUdO0hLyu0A92xk7R2Wet3kj99fmazTo+ZFYQP6b7AGOBxJUj8ZkJWzJ632ajpXko2Y5oNoGR2kvOwiDdu6hg==
   dependencies:
     jest-validate "^24.0.0"
     mkdirp "^0.5.1"
@@ -2451,10 +2451,10 @@ lodash.sortby@^4.7.0:
   resolved "https://registry.arcules.ninja/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
-lodash@^4.17.11:
-  version "4.17.11"
-  resolved "https://registry.arcules.ninja/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
-  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+lodash@^4.17.11, lodash@^4.17.13:
+  version "4.17.13"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
+  integrity sha512-vm3/XWXfWtRua0FkUyEHBZy8kCPjErNBT9fJx8Zvs+U6zjqPbTUOpkaoum3O5uiA8sm+yNMHXfYkTUHFoMxFNA==
 
 loose-envify@^1.0.0:
   version "1.4.0"

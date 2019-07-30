@@ -14,7 +14,7 @@
     "jest": "^24.1.0",
     "jest-junit": "^7.0.0",
     "koa": "^2.7.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "prettier": "1.18.2",
     "pretty-quick": "^1.10.0",
     "ts-jest": "^24.0.0",
