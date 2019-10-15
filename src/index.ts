@@ -74,17 +74,10 @@ const validate = (schema, config: ValidationConfig, ctx) => {
   }
 };
 
-const validateConfig = ({ path }: ValidationConfig) => {
-  if (isEmpty(path)) {
-    throw new Error("Path must not be empty");
-  }
-};
-
 module.exports = <T>(
   schema: Schema<T>,
   config: ValidationConfig = defaultConfig
 ) => {
-  validateConfig(config);
   return async (ctx: Context, next: any) => {
     const mergedConfig = { ...defaultConfig, ...config };
     const { path, errorHandler } = mergedConfig;
