@@ -2,7 +2,7 @@ const yup = require("yup");
 const mkValidator = require("../src");
 const _ = require("lodash");
 
-describe("Smoke tests", async () => {
+describe("Smoke tests", () => {
   test("Modifies context with path and calls next", async () => {
     const ctx: any = {
       request: {
