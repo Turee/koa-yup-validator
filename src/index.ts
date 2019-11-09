@@ -1,15 +1,14 @@
 // Schema = yup schema
-import { Schema, ValidateOptions } from "yup";
+import * as yup from "yup";
 import get from "lodash.get";
 import set from "lodash.set";
 import isEmpty from "lodash.isempty";
 import { Context } from "koa";
-const yup = require("yup");
 
 interface ValidationConfig {
   path?: String | any[];
   partial?: boolean;
-  yup?: ValidateOptions;
+  yup?: yup.ValidateOptions;
   errorHandler?: (ctx: Context, error: any) => any;
 }
 
@@ -80,8 +79,8 @@ const validateConfig = ({ path }: ValidationConfig) => {
   }
 };
 
-module.exports = <T>(
-  schema: Schema<T>,
+export = <T>(
+  schema: yup.Schema<T>,
   config: ValidationConfig = defaultConfig
 ) => {
   validateConfig(config);
