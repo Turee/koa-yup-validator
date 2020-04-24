@@ -18,7 +18,7 @@
     "lodash": "^4.17.15",
     "prettier": "2.0.0",
     "pretty-quick": "^2.0.0",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^25.1.0",
     "typescript": "^3.6.4",
     "yup": "^0.28.0"
   },
