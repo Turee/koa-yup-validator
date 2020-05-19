@@ -21,7 +21,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^25.1.0",
     "typescript": "^3.6.4",
-    "yup": "^0.28.0"
+    "yup": "^0.29.0"
   },
   "scripts": {
     "test": "jest --coverage --verbose",
