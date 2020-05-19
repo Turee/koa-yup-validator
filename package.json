@@ -10,7 +10,7 @@
     "@types/jest": "^25.1.0",
     "@types/koa": "^2.0.51",
     "@types/lodash": "^4.14.144",
-    "@types/yup": "^0.28.0",
+    "@types/yup": "^0.29.0",
     "husky": "^4.0.2",
     "jest": "^24.9.0",
     "jest-junit": "^10.0.0",
