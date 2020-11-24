@@ -1,6 +1,6 @@
-const yup = require("yup");
-const mkValidator = require("../src");
-const _ = require("lodash");
+import yup = require("yup");
+import _ = require("lodash");
+import mkValidator from "../src";
 
 describe("Smoke tests", () => {
   test("Modifies context with path and calls next", async () => {
@@ -8,13 +8,13 @@ describe("Smoke tests", () => {
       request: {
         body: {
           v1: 1,
-          v2: 2
-        }
-      }
+          v2: 2,
+        },
+      },
     };
     const next = jest.fn(async () => {});
     const schema = yup.object().shape({
-      v1: yup.string().required()
+      v1: yup.string().required(),
     });
 
     const validator = mkValidator(schema);
@@ -27,9 +27,9 @@ describe("Smoke tests", () => {
     const ctx: any = {
       request: {
         body: {
-          v1: "not a number"
-        }
-      }
+          v1: "not a number",
+        },
+      },
     };
     const validator = mkValidator(
       yup.object().shape({ v1: yup.number().required() })
@@ -38,7 +38,7 @@ describe("Smoke tests", () => {
     expect(ctx.response.status).toEqual(400);
     expect(ctx.response.body).toEqual(
       expect.objectContaining({
-        name: expect.stringMatching("ValidationError")
+        name: expect.stringMatching("ValidationError"),
       })
     );
   });
@@ -48,27 +48,27 @@ describe("Partial validation tests", () => {
   const validCtx: any = {
     request: {
       headers: {
-        v1: "test"
-      }
-    }
+        v1: "test",
+      },
+    },
   };
 
   const invalidCtx: any = {
     v1: "test",
-    v2: "should be object"
+    v2: "should be object",
   };
 
   const schema = yup.object().shape({
     v1: yup.string().required(),
     v2: yup.object().shape({
-      key: yup.string().required()
-    })
+      key: yup.string().required(),
+    }),
   });
 
   test("Partial validation on valid context", async () => {
     const validator = mkValidator(schema, {
       partial: true,
-      path: "request.headers"
+      path: "request.headers",
     });
     const ctx = _.cloneDeep(validCtx);
     const next = jest.fn(async () => {});
@@ -81,7 +81,7 @@ describe("Partial validation tests", () => {
   test("Partial validation on invalid context", async () => {
     const validator = mkValidator(schema, {
       partial: true,
-      path: "request.headers"
+      path: "request.headers",
     });
     const ctx = _.cloneDeep(invalidCtx);
     const next = jest.fn(async () => {});
@@ -91,7 +91,7 @@ describe("Partial validation tests", () => {
     expect(ctx.response.status).toEqual(400);
     expect(ctx.response.body).toEqual(
       expect.objectContaining({
-        name: expect.stringMatching("ValidationError")
+        name: expect.stringMatching("ValidationError"),
       })
     );
   });

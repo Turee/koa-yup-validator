@@ -7,7 +7,8 @@ Koa middleware for validating and coercing request data.
 `yarn install yup koa-yup-validator`
 
 ```javascript
-require("koa-yup-validator")(schema /*yup schema*/, options /* see below */);
+import createValidator from "koa-yup-validator";
+const validator = (schema /*yup schema*/, options) /* see below */;
 ```
 
 Options
@@ -21,16 +22,16 @@ Options
 
 Validate body
 
-```javascript
-const yup = require("yup");
-const validator = require("koa-yup-validator");
+```typescript
+import * as yup from "yup";
+import validator from "koa-yup-validator";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  toppings: yup.array().of(yup.string())
+  toppings: yup.array().of(yup.string()),
 });
 
-router.post("/pizza", validator(schema), ctx => {
+router.post("/pizza", validator(schema), (ctx) => {
   ctx.response.status = 200;
   ctx.response.body = "Valid pizza!";
 });
@@ -38,15 +39,15 @@ router.post("/pizza", validator(schema), ctx => {
 
 Validate anything within context
 
-```javascript
-const yup = require("yup");
-const validator = require("koa-yup-validator");
+```typescript
+import * as yup from "yup";
+import validator from "koa-yup-validator";
 
 const schema = yup.object().shape({
-  Authorization: yup.string().required()
+  Authorization: yup.string().required(),
 });
 //Validates headers
-router.post("/pizza", validator(schema, { path: "request.headers" }), ctx => {
+router.post("/pizza", validator(schema, { path: "request.headers" }), (ctx) => {
   ctx.response.status = 200;
   ctx.response.body = "Valid pizza!";
 });

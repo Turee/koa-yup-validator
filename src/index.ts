@@ -5,7 +5,7 @@ import set from "lodash.set";
 import isEmpty from "lodash.isempty";
 import { Context } from "koa";
 
-interface ValidationConfig {
+export interface ValidationConfig {
   path?: String | any[];
   partial?: boolean;
   yup?: yup.ValidateOptions;
@@ -24,7 +24,7 @@ const defaultErrorHandler = (ctx: Context, error: any) => {
 const defaultConfig = {
   path: "request.body",
   partial: false, //Allows body to satisfy schema partially at root level
-  errorHandler: defaultErrorHandler
+  errorHandler: defaultErrorHandler,
 };
 
 const VALIDATE_CONFIG = { stripUnknown: true, abortEarly: false };
@@ -54,7 +54,7 @@ const partialValidate = async (schema, data, { yup: yupConfig = {} }) => {
         await yup
           .object()
           .shape({
-            [k]: validationSchema
+            [k]: validationSchema,
           })
           .validate({ [k]: data[k] }, { ...VALIDATE_CONFIG, ...yupConfig })
       );
@@ -79,22 +79,22 @@ const validateConfig = ({ path }: ValidationConfig) => {
   }
 };
 
-export = <T>(
+export default function validator<T>(
   schema: yup.Schema<T>,
   config: ValidationConfig = defaultConfig
-) => {
+) {
   validateConfig(config);
   return async (ctx: Context, next: any) => {
     const mergedConfig = { ...defaultConfig, ...config };
     const { path, errorHandler } = mergedConfig;
 
     return validate(schema, mergedConfig, ctx)
-      .then(async data => {
+      .then(async (data) => {
         set(ctx, path, data);
         await next();
       })
-      .catch(error => {
+      .catch((error) => {
         return errorHandler(ctx, error);
       });
   };
-};
+}
