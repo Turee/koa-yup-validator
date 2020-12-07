@@ -4,7 +4,7 @@ Koa middleware for validating and coercing request data.
 
 ## Usage
 
-`yarn install yup koa-yup-validator`
+`yarn add yup koa-yup-validator`
 
 ```javascript
 import createValidator from "koa-yup-validator";
