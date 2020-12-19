@@ -19,7 +19,7 @@
     "prettier": "2.0.0",
     "pretty-quick": "^2.0.0",
     "rimraf": "^3.0.2",
-    "ts-jest": "^25.1.0",
+    "ts-jest": "^26.0.0",
     "typescript": "^3.6.4",
     "yup": "^0.29.0"
   },
