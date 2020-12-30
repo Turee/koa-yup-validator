@@ -17,7 +17,7 @@ describe("Smoke tests", () => {
       v1: yup.string().required(),
     });
 
-    const validator = mkValidator(schema);
+    const validator = mkValidator<{ v1: string }>(schema);
     await validator(ctx, next);
     expect(ctx).toEqual({ request: { body: { v1: "1" } } });
     expect(next).toBeCalled();
@@ -31,7 +31,7 @@ describe("Smoke tests", () => {
         },
       },
     };
-    const validator = mkValidator(
+    const validator = mkValidator<any>(
       yup.object().shape({ v1: yup.number().required() })
     );
     await validator(ctx, () => {});
@@ -66,7 +66,7 @@ describe("Partial validation tests", () => {
   });
 
   test("Partial validation on valid context", async () => {
-    const validator = mkValidator(schema, {
+    const validator = mkValidator<any>(schema, {
       partial: true,
       path: "request.headers",
     });
@@ -79,7 +79,7 @@ describe("Partial validation tests", () => {
   });
 
   test("Partial validation on invalid context", async () => {
-    const validator = mkValidator(schema, {
+    const validator = mkValidator<any>(schema, {
       partial: true,
       path: "request.headers",
     });
