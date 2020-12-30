@@ -4,11 +4,12 @@ import get from "lodash.get";
 import set from "lodash.set";
 import isEmpty from "lodash.isempty";
 import { Context } from "koa";
+import { ValidateOptions } from "yup/lib/types";
 
 export interface ValidationConfig {
   path?: String | any[];
   partial?: boolean;
-  yup?: yup.ValidateOptions;
+  yup?: ValidateOptions;
   errorHandler?: (ctx: Context, error: any) => any;
 }
 
@@ -31,7 +32,7 @@ const VALIDATE_CONFIG = { stripUnknown: true, abortEarly: false };
 
 const reachSchema = (schema, path) => {
   try {
-    return yup.reach(schema, path);
+    return yup.reach(schema, path, undefined, undefined);
   } catch (e) {
     return false;
   }
@@ -80,7 +81,7 @@ const validateConfig = ({ path }: ValidationConfig) => {
 };
 
 export default function validator<T>(
-  schema: yup.Schema<T>,
+  schema: yup.SchemaOf<T>,
   config: ValidationConfig = defaultConfig
 ) {
   validateConfig(config);

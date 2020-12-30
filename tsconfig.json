@@ -9,6 +9,8 @@
     "outDir": "dist",
     "baseUrl": ".",
     "declaration": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": false,
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
     }
