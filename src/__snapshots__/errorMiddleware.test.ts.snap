@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`errorMiddleware when using the error middleware when called with invalid request returns formatted error 1`] = `
+Object {
+  "type": "ValidationError",
+  "validationErrors": Object {
+    "body": Array [
+      Object {
+        "message": "name is a required field",
+        "path": "name",
+        "type": "required",
+      },
+      Object {
+        "message": "toppings is a required field",
+        "path": "toppings",
+        "type": "required",
+      },
+    ],
+  },
+}
+`;
+
+exports[`formatValidationError when given array schema formats error correctly 1`] = `
+Object {
+  "type": "ValidationError",
+  "validationErrors": Object {
+    "body": Array [
+      Object {
+        "message": "[0] must be a \`number\` type, but the final value was: \`NaN\` (cast from the value \`\\"asdf\\"\`).",
+        "path": "[0]",
+        "type": "typeError",
+      },
+    ],
+  },
+}
+`;
+
+exports[`formatValidationError when given array schema with nested values formats error correctly 1`] = `
+Object {
+  "type": "ValidationError",
+  "validationErrors": Object {
+    "body": Array [
+      Object {
+        "message": "[0].stringKey must be a valid URL",
+        "path": "[0].stringKey",
+        "type": "url",
+      },
+      Object {
+        "message": "[0].numberKey must be greater than or equal to 5",
+        "path": "[0].numberKey",
+        "type": "min",
+      },
+      Object {
+        "message": "[0].missingKey is a required field",
+        "path": "[0].missingKey",
+        "type": "required",
+      },
+      Object {
+        "message": "[0].nestedObject.key is a required field",
+        "path": "[0].nestedObject.key",
+        "type": "required",
+      },
+    ],
+  },
+}
+`;
+
+exports[`formatValidationError when given containing array schema formats error correctly 1`] = `
+Object {
+  "type": "ValidationError",
+  "validationErrors": Object {
+    "body": Array [
+      Object {
+        "message": "arr[0].stringKey is a required field",
+        "path": "arr[0].stringKey",
+        "type": "required",
+      },
+      Object {
+        "message": "arr[0].numberKey is a required field",
+        "path": "arr[0].numberKey",
+        "type": "required",
+      },
+      Object {
+        "message": "arr[0].missingKey is a required field",
+        "path": "arr[0].missingKey",
+        "type": "required",
+      },
+      Object {
+        "message": "arr[0].nestedObject.key is a required field",
+        "path": "arr[0].nestedObject.key",
+        "type": "required",
+      },
+      Object {
+        "message": "arr field must have at least 2 items",
+        "path": "arr",
+        "type": "min",
+      },
+    ],
+  },
+}
+`;
+
+exports[`formatValidationError when given nested schema formats error correctly 1`] = `
+Object {
+  "type": "ValidationError",
+  "validationErrors": Object {
+    "body": Array [
+      Object {
+        "message": "stringKey must be a valid URL",
+        "path": "stringKey",
+        "type": "url",
+      },
+      Object {
+        "message": "numberKey must be greater than or equal to 5",
+        "path": "numberKey",
+        "type": "min",
+      },
+      Object {
+        "message": "missingKey is a required field",
+        "path": "missingKey",
+        "type": "required",
+      },
+      Object {
+        "message": "nestedObject.key is a required field",
+        "path": "nestedObject.key",
+        "type": "required",
+      },
+    ],
+  },
+}
+`;
+
+exports[`formatValidationError when given number schema formats error correctly 1`] = `
+Object {
+  "type": "ValidationError",
+  "validationErrors": Object {
+    "body": Array [
+      Object {
+        "message": "this must be a \`number\` type, but the final value was: \`NaN\` (cast from the value \`\\"asdf\\"\`).",
+        "path": "",
+        "type": "typeError",
+      },
+    ],
+  },
+}
+`;
