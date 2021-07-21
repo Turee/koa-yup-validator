@@ -39,6 +39,16 @@ Specify options for each validator ie.
 | partial | Allows data to satisfy schema partially at root level (if the data key exists it must satisfy schema). Useful for example patch operations. |
 | yup     | Options to be passed to yup validate.                                                                                                       |
 
+### Error handling
+
+There is an optional error middleware you may use for handling errors thrown by the validation middleware:
+
+```typescript
+import { createErrorMiddleware } from "koa-yup-validator";
+app.use(createErrorMiddleware());
+//...your routes
+```
+
 ## Examples
 
 Validate headers and body
@@ -59,6 +69,20 @@ const RequiredHeaders = yup.object().shape({
 router.post(
   "/pizza",
   validator({ body: Pizza, headers: RequiredHeaders }),
+  (ctx) => {
+    console.log(ctx.request.headers["x-pizza-maker"]);
+    ctx.response.status = 200;
+    ctx.response.body = "Valid pizza!";
+  }
+);
+
+// Pass yup options for body
+router.post(
+  "/strict-pizza",
+  validator(
+    { body: Pizza, headers: RequiredHeaders },
+    { body: { yup: { strict: true } } }
+  ),
   (ctx) => {
     console.log(ctx.request.headers["x-pizza-maker"]);
     ctx.response.status = 200;

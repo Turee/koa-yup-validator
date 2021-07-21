@@ -32,10 +32,9 @@ export type ValidatedContext<
   THead extends TypedSchema
 > = { request: ValidatedProperties<TBody, TQuery, TParams, THead> };
 
-export type ValidationErrors = Record<
-  keyof Partial<Validator<any, any, any, any>>,
-  yup.ValidationError
->;
+export type ValidationErrors = {
+  [K in keyof Partial<Validator<any, any, any, any>>]: yup.ValidationError;
+};
 
 export class RequestValidationError extends Error {
   constructor(message: string, validationErrors: ValidationErrors) {
