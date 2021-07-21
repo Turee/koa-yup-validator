@@ -8,47 +8,61 @@ Koa middleware for validating and coercing request data.
 
 ```javascript
 import createValidator from "koa-yup-validator";
-const validator = (schema /*yup schema*/, options) /* see below */;
+const validator = createValidator(validators, options); /* see below */
 ```
 
-Options
+Arguments
 
-|              |                                                                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| partial      | Allows data to satisfy schema partially at root level (if the data key exists it must satisfy schema). Useful for example patch operations. |
-| path         | Context path to validate                                                                                                                    |
-| yup          | Options to be passed to yup validate.                                                                                                       |
-| errorHandler | Provide custom error handler.                                                                                                               |
+**validators**
 
-Validate body
+```typescript
+{
+  body: schema; // validates request body
+  headers: schema; // validates request headers
+  params: schema; // validates path params
+  query: schema; // validates query params
+}
+```
+
+**options**:
+
+Specify options for each validator ie.
+
+```
+{
+  body: options
+}
+```
+
+|         |                                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| partial | Allows data to satisfy schema partially at root level (if the data key exists it must satisfy schema). Useful for example patch operations. |
+| yup     | Options to be passed to yup validate.                                                                                                       |
+
+## Examples
+
+Validate headers and body
 
 ```typescript
 import * as yup from "yup";
 import validator from "koa-yup-validator";
 
-const schema = yup.object().shape({
+const Pizza = yup.object().shape({
   name: yup.string().required(),
   toppings: yup.array().of(yup.string()),
 });
-
-router.post("/pizza", validator(schema), (ctx) => {
-  ctx.response.status = 200;
-  ctx.response.body = "Valid pizza!";
-});
-```
-
-Validate anything within context
-
-```typescript
-import * as yup from "yup";
-import validator from "koa-yup-validator";
-
-const schema = yup.object().shape({
+const RequiredHeaders = yup.object().shape({
   Authorization: yup.string().required(),
+  "x-pizza-maker": yup.string(),
 });
-//Validates headers
-router.post("/pizza", validator(schema, { path: "request.headers" }), (ctx) => {
-  ctx.response.status = 200;
-  ctx.response.body = "Valid pizza!";
-});
+
+router.post(
+  "/pizza",
+  validator({ body: Pizza, headers: RequiredHeaders }),
+  (ctx) => {
+    console.log(ctx.request.headers["x-pizza-maker"]);
+    ctx.response.status = 200;
+    ctx.response.body = "Valid pizza!";
+  }
+);
 ```
