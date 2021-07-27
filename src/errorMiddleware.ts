@@ -38,6 +38,8 @@ export const createErrorMiddleware =
       if (e instanceof RequestValidationError) {
         ctx.response.body = formatRequestValidationError(e);
         ctx.response.status = 400;
+      } else {
+        throw e;
       }
     }
   };
