@@ -73,8 +73,8 @@ describe("errorMiddleware", () => {
       createValidationMiddleware({
         body: schema,
       }),
-      ({ request, response }) => {
-        response.body = { count: request.body.ingredients };
+      ({ response, state }) => {
+        response.body = { count: state.validated.body.name };
       }
     );
     app.use(bodyParser());
