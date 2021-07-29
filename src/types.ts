@@ -1,36 +1,28 @@
-import { TypedSchema } from "yup/es/util/types";
 import * as yup from "yup";
 import { ValidateOptions } from "yup/lib/types";
+import Koa from "koa";
+import { AnySchema, BaseSchema } from "yup";
 
-export type Validator<
-  TBody extends TypedSchema,
-  TQuery extends TypedSchema,
-  TParams extends TypedSchema,
-  THead extends TypedSchema
-> = {
+export type Validator<TBody, TQuery, TParams, THead> = {
   body: TBody;
   headers: THead;
   query: TQuery;
   params: TParams;
 };
 
-export type ValidatedProperties<
-  TBody extends TypedSchema,
-  TQuery extends TypedSchema,
-  TParams extends TypedSchema,
-  THead extends TypedSchema
-> = {
-  [k in keyof Validator<TBody, TQuery, TParams, THead>]: yup.Asserts<
-    Validator<TBody, TQuery, TParams, THead>[k]
-  >;
-};
-
-export type ValidatedContext<
-  TBody extends TypedSchema,
-  TQuery extends TypedSchema,
-  TParams extends TypedSchema,
-  THead extends TypedSchema
-> = { request: ValidatedProperties<TBody, TQuery, TParams, THead> };
+export interface ValidatedState<
+  TBody extends BaseSchema = AnySchema,
+  TQuery extends BaseSchema = AnySchema,
+  TParams extends BaseSchema = AnySchema,
+  THead extends BaseSchema = AnySchema
+> extends Koa.DefaultState {
+  validated: {
+    body: yup.Asserts<TBody>;
+    headers: yup.Asserts<THead>;
+    query: yup.Asserts<TQuery>;
+    params: yup.Asserts<TParams>;
+  };
+}
 
 export type ValidationErrors = {
   [K in keyof Partial<Validator<any, any, any, any>>]: yup.ValidationError;

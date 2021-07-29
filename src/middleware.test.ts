@@ -5,7 +5,6 @@ import { createValidationMiddleware } from "./middleware";
 import * as yup from "yup";
 import supertest from "supertest";
 import { RequestValidationError } from "./types";
-import objectContaining = jasmine.objectContaining;
 import { ValidationError } from "yup";
 
 describe("middleware", () => {
@@ -14,6 +13,7 @@ describe("middleware", () => {
 
     const nameSchema = yup.object().shape({
       name: yup.string().required(),
+      otherField: yup.string(),
     });
 
     const numberSchema = yup.object().shape({
@@ -37,8 +37,8 @@ describe("middleware", () => {
       createValidationMiddleware({
         body: nameSchema,
       }),
-      ({ request, response }) => {
-        response.body = { count: request.body.ingredients };
+      ({ request, response, state }) => {
+        response.body = { count: state.validated.body.name };
       }
     );
 
@@ -50,12 +50,14 @@ describe("middleware", () => {
         headers: nameSchema,
         query: nameSchema,
       }),
-      ({ request, response }) => {
+      ({ response, state }) => {
+        const { body, headers, query, params } = state.validated;
+
         response.body = {
-          body: request.body,
-          headers: request.headers,
-          query: request.query,
-          params: request.params,
+          body: body,
+          headers: headers,
+          query: query,
+          params: params,
         };
       }
     );
